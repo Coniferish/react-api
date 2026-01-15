@@ -5,7 +5,6 @@ import Exercise1 from "./Exercise1"
 import Exercise2 from "./Exercise2"
 
 export const exercises = [
-    // { id: folder-name, ... , component: ExportedComponent }
-    { id: 'Exercise1', title: 'Basic Fetch', component: Exercise1 },
-    { id: 'Exericse2', title: 'Basic Fetch2', component: Exercise2 },
+    { id: '1', title: 'Basic Fetch', component: Exercise1 },
+    { id: '2', title: 'Basic Fetch2', component: Exercise2 },
 ]
