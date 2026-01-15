@@ -22,6 +22,11 @@ If you are developing a production application, we recommend using TypeScript wi
 The documentation indicates that you will probably want to use a template for your project, but since this is a bare-bones project we'll actually use the "declarative mode" so that additional features such as state management for data loading or other features. ([source](https://reactrouter.com/start/modes))
 
 ## Installation
+
 https://reactrouter.com/start/declarative/installation
 
 `npm i react-router`
+
+# TODOs
+
+- Find or create a precommit hook to use AI to generate  commit messages"
