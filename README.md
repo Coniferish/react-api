@@ -30,3 +30,4 @@ https://reactrouter.com/start/declarative/installation
 # TODOs
 
 - Find or create a precommit hook to use AI to generate  commit messages"
+- Write a build-time script to dynamically generate the list of exercises
