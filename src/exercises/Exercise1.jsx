@@ -9,6 +9,8 @@
  *  indicating the todo item was completed.
  */
 
+import { useState, useEffect } from 'react'
+
 export default function Exercise1() {
     // define the state I'll need
     // - loading, errors, todo items
@@ -19,6 +21,9 @@ export default function Exercise1() {
     // - render loading, error, loaded data 
     // -- list of items with a checkbox input
     // -- onClick PATCH request when toggling the checkbox as done/not done
+    const [isLoading, setIsLoading] = useState(true)
+    const [error, setError] = useState(null)
+    const [todos, setTodos] = useState(null)
 
     return (
         <h1>Welcome to exercise 1</h1>
