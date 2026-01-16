@@ -10,6 +10,16 @@
  */
 
 export default function Exercise1() {
+    // define the state I'll need
+    // - loading, errors, todo items
+    // useEffect to fetch the data
+    // - GET request
+    // - Only trigger on initial render
+    // HTML
+    // - render loading, error, loaded data 
+    // -- list of items with a checkbox input
+    // -- onClick PATCH request when toggling the checkbox as done/not done
+
     return (
         <h1>Welcome to exercise 1</h1>
     )
