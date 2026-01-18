@@ -11,6 +11,8 @@
 
 import { useState, useEffect } from 'react'
 
+const BASE_URL = "https://jsonplaceholder.typicode.com/todos"
+
 export default function Exercise1() {
     // define the state I'll need
     // - loading, errors, todo items
@@ -27,10 +29,20 @@ export default function Exercise1() {
 
     useEffect(() => {
         (async () => {
-
+            try {
+                const response = await fetch(BASE_URL+'?_limit=10')
+                if (!response.ok) {
+                    throw new Error(`HTTP error: ${response.status}`)
+                }
+                const data = await response.json()
+                console.log(data)
+                setTodos(data)
+            } catch (err) {
+                setError(err)
+            }
         })();
-    }, [])
-    
+    }, []);
+
     if (isLoading) {
         return <>Loading...</>
     }
