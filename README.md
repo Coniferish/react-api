@@ -1,3 +1,11 @@
+# Welcome
+
+## How to use this repo
+
+This repo contains exercises for learning and practicing working with APIs in React.
+
+The main branch has exercise prompts and solutions to the exercises are on individual branches. You can view the solutions and step through the development of them through the commit history by looking at the PRs on github. The diff will show you the code changes and the commit messages contain additional explanations. By reviewing the commits in order, you can follow the thought process and see how the solution evolved incrementally.
+
 # React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
