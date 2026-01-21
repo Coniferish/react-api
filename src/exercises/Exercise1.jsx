@@ -11,6 +11,8 @@
 
 import { useState, useEffect } from 'react'
 
+const BASE_URL = "https://jsonplaceholder.typicode.com/todos"
+
 export default function Exercise1() {
     // define the state I'll need
     // - loading, errors, todo items
@@ -26,7 +28,13 @@ export default function Exercise1() {
     const [todos, setTodos] = useState(null)
 
     useEffect(() => {
+        fetch(BASE_URL+'?_limit=10')
+        .then(response => {
 
+        })
+        .catch(error => {
+            
+        })
     }, []);
 
     return (
