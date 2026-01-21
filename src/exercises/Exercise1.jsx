@@ -25,6 +25,10 @@ export default function Exercise1() {
     const [error, setError] = useState(null)
     const [todos, setTodos] = useState(null)
 
+    useEffect(() => {
+
+    }, []);
+
     return (
         <h1>Welcome to exercise 1</h1>
     )
