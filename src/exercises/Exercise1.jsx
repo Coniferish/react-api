@@ -30,11 +30,13 @@ export default function Exercise1() {
     useEffect(() => {
         fetch(BASE_URL+'?_limit=10')
         .then(response => {
-
-        })
-        .catch(error => {
-            
-        })
+            if (!response.ok) {                         
+                throw new Error(`HTTP error: ${response.status}`)
+            }
+            return response.json()})
+        .then(data => setTodos(data))
+        .catch(error => setError(error))
+        .finally(() => setIsLoading(false))
     }, []);
 
     return (
