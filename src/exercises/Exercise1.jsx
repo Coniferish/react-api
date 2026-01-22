@@ -36,13 +36,16 @@ export default function Exercise1() {
                 throw new Error(`HTTP error: ${response.status}`)
             }
             return response.json()})
-        .then(data => setTodos(data))
+        .then(data => {
+            setTodos(data)
+            setIsLoading(false)
+        })
         .catch(error => {
             if (error.name !== 'AbortError') {
                 setError(error)
+                setIsLoading(false)
             }
         })
-        .finally(() => setIsLoading(false))
 
         return () => controller.abort()
     }, []);
@@ -50,10 +53,9 @@ export default function Exercise1() {
     function handleClick(item) {
         const prevTodos = todos.map(t => ({...t}))
 
-        setTodos(prevTodos => 
-            prevTodos.map(t =>
-                t.id === item.id ? {...t, completed: !t.completed} : t
-            )
+        setTodos(prevTodos => prevTodos.map(t => {
+                return t.id === item.id ? {...t, completed: !t.completed} : t
+            })
         )
 
         fetch(BASE_URL+`/${item.id}`, {
