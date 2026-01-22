@@ -28,15 +28,23 @@ export default function Exercise1() {
     const [todos, setTodos] = useState(null)
 
     useEffect(() => {
-        fetch(BASE_URL+'?_limit=10')
+        const controller = new AbortController()
+
+        fetch(BASE_URL+'?_limit=10', {signal: controller.signal})
         .then(response => {
             if (!response.ok) {                         
                 throw new Error(`HTTP error: ${response.status}`)
             }
             return response.json()})
         .then(data => setTodos(data))
-        .catch(error => setError(error))
+        .catch(error => {
+            if (error.name !== 'AbortError') {
+                setError(error)
+            }
+        })
         .finally(() => setIsLoading(false))
+
+        return () => controller.abort()
     }, []);
 
     return (
