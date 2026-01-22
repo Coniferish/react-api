@@ -48,6 +48,14 @@ export default function Exercise1() {
     }, []);
 
     function handleClick(item) {
+        const prevTodos = todos.map(t => ({...t}))
+
+        setTodos(prevTodos => 
+            prevTodos.map(t =>
+                t.id === item.id ? {...t, completed: !t.completed} : t
+            )
+        )
+
         fetch(BASE_URL+`/${item.id}`, {
             method: 'PATCH',
             headers: {
@@ -59,10 +67,12 @@ export default function Exercise1() {
             if (!response.ok) {
                 throw new Error(`HTTP error: ${response.status}`)
             }
-            setTodos(prevTodos => prevTodos.map(t => t.id === item.id ? {...t, completed: !t.completed} : t))
             console.log(response.status)
         })
-        .catch(error => setError(error))
+        .catch(error => {
+            setTodos(prevTodos)
+            setError(error)
+        })
     }
 
     if (isLoading) return <>Loading...</>
