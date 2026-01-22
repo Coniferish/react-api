@@ -14,15 +14,6 @@ import { useState, useEffect } from 'react'
 const BASE_URL = "https://jsonplaceholder.typicode.com/todos"
 
 export default function Exercise1() {
-    // define the state I'll need
-    // - loading, errors, todo items
-    // useEffect to fetch the data
-    // - GET request
-    // - Only trigger on initial render
-    // HTML
-    // - render loading, error, loaded data 
-    // -- list of items with a checkbox input
-    // -- onClick PATCH request when toggling the checkbox as done/not done
     const [isLoading, setIsLoading] = useState(true)
     const [error, setError] = useState(null)
     const [todos, setTodos] = useState(null)
@@ -65,11 +56,10 @@ export default function Exercise1() {
             },
             body: JSON.stringify({ completed: !item.completed })
         })
-        .then( response => {
+        .then(response => {
             if (!response.ok) {
                 throw new Error(`HTTP error: ${response.status}`)
             }
-            console.log(response.status)
         })
         .catch(error => {
             setTodos(prevTodos)
