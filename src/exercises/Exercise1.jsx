@@ -47,6 +47,24 @@ export default function Exercise1() {
         return () => controller.abort()
     }, []);
 
+    function handleClick(item) {
+        fetch(BASE_URL+`/${item.id}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ completed: !item.completed })
+        })
+        .then( response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error: ${response.status}`)
+            }
+            setTodos(prevTodos => prevTodos.map(t => t.id === item.id ? {...t, completed: !t.completed} : t))
+            console.log(response.status)
+        })
+        .catch(error => setError(error))
+    }
+
     if (isLoading) return <>Loading...</>
     
     if (error) return <>Error: {error.message}</>
@@ -55,7 +73,7 @@ export default function Exercise1() {
         <>
             <h1>Welcome to exercise 1</h1>
             <ul style={{listStyle:'none', padding:0, margin:0, textAlign:'left'}}>
-                {todos.map(item => <li key={item.id}> <input type='checkbox' checked={item.completed}/>{item.title}</li>)}
+                {todos.map(item => <li key={item.id}> <input type='checkbox' checked={item.completed} onChange={() => handleClick(item)}/>{item.title}</li>)}
             </ul>
         </>
     )
