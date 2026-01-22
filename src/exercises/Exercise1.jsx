@@ -47,6 +47,10 @@ export default function Exercise1() {
         return () => controller.abort()
     }, []);
 
+    if (isLoading) return <>Loading...</>
+    
+    if (error) return <>Error: {error.message}</>
+
     return (
         <h1>Welcome to exercise 1</h1>
     )
