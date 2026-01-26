@@ -21,9 +21,9 @@ export default function Exercise1() {
     // - render loaded data 
     // -- list of items with a checkbox input
     // -- onClick PATCH request when toggling the checkbox as done/not done
-    const [isLoading, setIsLoading] = useState(true)
     const [error, setError] = useState(null)
     const [todos, setTodos] = useState(null)
+    const isLoading = todos === null && error === null
 
     return (
         <h1>Welcome to exercise 1</h1>
