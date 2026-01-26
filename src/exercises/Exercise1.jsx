@@ -25,6 +25,10 @@ export default function Exercise1() {
     const [todos, setTodos] = useState(null)
     const isLoading = todos === null && error === null
 
+    useEffect(() => {
+
+    }, [])
+    
     if (isLoading) {
         return <>Loading...</>
     }
