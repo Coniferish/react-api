@@ -26,7 +26,9 @@ export default function Exercise1() {
     const isLoading = todos === null && error === null
 
     useEffect(() => {
+        (async () => {
 
+        })();
     }, [])
     
     if (isLoading) {
