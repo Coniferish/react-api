@@ -14,15 +14,6 @@ import { useState, useEffect } from 'react'
 const BASE_URL = "https://jsonplaceholder.typicode.com/todos"
 
 export default function Exercise1() {
-    // define the state I'll need
-    // - loading, errors, todo items
-    // useEffect to fetch the data
-    // - GET request
-    // - Only trigger on initial render
-    // HTML
-    // - render loaded data 
-    // -- list of items with a checkbox input
-    // -- onClick PATCH request when toggling the checkbox as done/not done
     const [error, setError] = useState(null)
     const [todos, setTodos] = useState(null)
     const isLoading = todos === null && error === null
@@ -37,14 +28,13 @@ export default function Exercise1() {
                     throw new Error(`HTTP error: ${response.status}`)
                 }
                 const data = await response.json()
-                console.log(data)
                 if (!ignore) setTodos(data)
             } catch (err) {
                 if (!ignore) setError(err)
             }
         })();
 
-        return () => {ignore = true} // cleanup function
+        return () => {ignore = true}
     }, []);
 
     async function handleToggle(item) {
@@ -62,7 +52,6 @@ export default function Exercise1() {
             if (!response.ok) {
                 throw new Error(`HTTP error: ${response.status}`)
             }
-            console.log(response.status)
         } catch (error) {
             setTodos(previousTodos)
             setError(error)
