@@ -48,6 +48,9 @@ export default function Exercise1() {
     }, []);
 
     async function handleToggle(item) {
+        const previousTodos = todos.map(t => ({...t}))
+        setTodos(todos => todos.map(t => t.id === item.id ? {...t, completed: !t.completed} : t))
+
         try {
             const response = await fetch(BASE_URL+`/${todos.id}`, {
                 method:'PATCH',
@@ -59,9 +62,9 @@ export default function Exercise1() {
             if (!response.ok) {
                 throw new Error(`HTTP error: ${response.status}`)
             }
-            setTodos(todos => todos.map(t => t.id === item.id ? {...t, completed: !t.completed} : t))
             console.log(response.status)
         } catch (error) {
+            setTodos(previousTodos)
             setError(error)
         }
     }
