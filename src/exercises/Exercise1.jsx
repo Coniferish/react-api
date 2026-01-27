@@ -10,6 +10,20 @@
  */
 
 export default function Exercise1() {
+    /*
+    1) declare state
+    2) render different states (loading and error)
+    3) render loaded state
+        a) fetch the data on initial render (useEffect)
+        b) set the todos state with the data
+        c) render the list of todo items with checkboxes
+    4) interaction
+        a) handle onChange for clicking the checkbox
+            i) PATCH request to make the change
+                1) optimistic pattern
+    */
+
+
     return (
         <h1>Welcome to exercise 1</h1>
     )
