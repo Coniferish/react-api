@@ -28,6 +28,8 @@ export default function Exercise1() {
     const isLoading = todos === null && error === null
 
     useEffect(() => {
+        let ignore = false;
+
         (async () => {
             try {
                 const response = await fetch(BASE_URL+'?_limit=10')
@@ -36,11 +38,13 @@ export default function Exercise1() {
                 }
                 const data = await response.json()
                 console.log(data)
-                setTodos(data)
+                if (!ignore) setTodos(data)
             } catch (err) {
-                setError(err)
+                if (!ignore) setError(err)
             }
         })();
+
+        return () => {ignore = true} // cleanup function
     }, []);
 
     if (isLoading) {
