@@ -47,6 +47,10 @@ export default function Exercise1() {
         return () => {ignore = true} // cleanup function
     }, []);
 
+    async function handleToggle(item) {
+
+    }
+
     if (isLoading) {
         return <>Loading...</>
     }
@@ -59,7 +63,7 @@ export default function Exercise1() {
         <>
             <h1>Welcome to exercise 1</h1>
             <ul style={{listStyle:'none', padding:0, margin:0, textAlign:'left'}}>
-                {todos.map(item => <li key={item.id}> <input type='checkbox' checked={item.completed}/>{item.title}</li>)}
+                {todos.map(item => <li key={item.id}> <input type='checkbox' onChange={handleToggle(item)} checked={item.completed}/>{item.title}</li>)}
             </ul>
         </>
     )
