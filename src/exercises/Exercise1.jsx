@@ -8,6 +8,7 @@
  *  render them as a list with checkboxes that when checked send a request
  *  indicating the todo item was completed.
  */
+import { useState } from "react"
 
 export default function Exercise1() {
     /*
@@ -22,6 +23,9 @@ export default function Exercise1() {
             i) PATCH request to make the change
                 1) optimistic pattern
     */
+   const [todos, setTodos] = useState(null)
+   const [error, setError] = useState(null)
+   const isLoading = todos === null && error === null
 
 
     return (
