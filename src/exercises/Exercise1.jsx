@@ -27,6 +27,13 @@ export default function Exercise1() {
    const [error, setError] = useState(null)
    const isLoading = todos === null && error === null
 
+   if (isLoading) {
+    return "Loading..."
+   }
+
+   if (error) {
+    return `Error: ${error}`
+   }
 
     return (
         <h1>Welcome to exercise 1</h1>
