@@ -8,7 +8,9 @@
  *  render them as a list with checkboxes that when checked send a request
  *  indicating the todo item was completed.
  */
-import { useState } from "react"
+import { useState, useEffect } from "react"
+
+const BASE_URL = "https://jsonplaceholder.typicode.com/todos"
 
 export default function Exercise1() {
     /*
@@ -26,6 +28,24 @@ export default function Exercise1() {
    const [todos, setTodos] = useState(null)
    const [error, setError] = useState(null)
    const isLoading = todos === null && error === null
+
+    useEffect(() => {
+        async function fetchTodos() {
+            try {
+                const response = await fetch(BASE_URL + "?_limit=10")
+                if (!response.ok) {
+                    throw new Error(`HTTP error: ${response.status}`)
+                }
+                const data = await response.json()
+                setTodos(data)
+                console.log("testing")
+                console.log(data)
+            } catch  (error) {
+                setError(error)
+            }
+        }
+        fetchTodos()
+    }, []);
 
    if (isLoading) {
     return "Loading..."
