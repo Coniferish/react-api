@@ -30,9 +30,12 @@ export default function Exercise1() {
    const isLoading = todos === null && error === null
 
     useEffect(() => {
+        const controller = new AbortController();
+        const signal = controller.signal
+
         async function fetchTodos() {
             try {
-                const response = await fetch(BASE_URL + "?_limit=10")
+                const response = await fetch(BASE_URL + "?_limit=10", { signal })
                 if (!response.ok) {
                     throw new Error(`HTTP error: ${response.status}`)
                 }
@@ -40,11 +43,15 @@ export default function Exercise1() {
                 setTodos(data)
                 console.log("testing")
                 console.log(data)
-            } catch  (error) {
-                setError(error)
+            } catch (error) {
+                if (error.name !== 'AbortError') {
+                    setError(error)
+                }
             }
         }
         fetchTodos()
+
+        return () => controller.abort()
     }, []);
 
    if (isLoading) {
