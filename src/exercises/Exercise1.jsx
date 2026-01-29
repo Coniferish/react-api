@@ -64,8 +64,12 @@ export default function Exercise1() {
     return (
         <>
         <h1>Welcome to exercise 1</h1>
-        <ul>
-            {todos.map(t => <li key={t.id}>{t.title}</li>)}
+        <ul style={{
+            listStyle:'none',
+            padding:0,
+            textAlign:'left'
+        }}>
+            {todos.map(t => <li key={t.id}><input type='checkbox' checked={t.completed}/>{t.title}</li>)}
         </ul>
         </>
     )
