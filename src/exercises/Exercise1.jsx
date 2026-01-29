@@ -41,7 +41,6 @@ export default function Exercise1() {
                 }
                 const data = await response.json()
                 setTodos(data)
-                console.log("testing")
                 console.log(data)
             } catch (error) {
                 if (error.name !== 'AbortError') {
@@ -63,6 +62,11 @@ export default function Exercise1() {
    }
 
     return (
+        <>
         <h1>Welcome to exercise 1</h1>
+        <ul>
+            {todos.map(t => <li key={t.id}>{t.title}</li>)}
+        </ul>
+        </>
     )
 }
