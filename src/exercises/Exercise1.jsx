@@ -54,6 +54,7 @@ export default function Exercise1() {
     }, []);
 
     async function handleToggle(todo) {
+        const prevTodos = [...todos]
         setTodos(todos =>
             todos.map(t =>
                 t.id === todo.id ? {...t, completed: !t.completed } : t
@@ -67,9 +68,12 @@ export default function Exercise1() {
                 body: JSON.stringify({completed: !todo.completed})
             })
             if (!response.ok) {
+                setTodos(prevTodos)
                 throw new Error(`HTTP error: ${response.status}`)
+
             }
         } catch (error) {
+            setTodos(prevTodos)
             setError(error)
         }
     }
