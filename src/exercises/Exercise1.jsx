@@ -48,7 +48,22 @@ export default function Exercise1() {
     }, []);
 
     async function handleToggle(item) {
-
+        try {
+            const response = await fetch(BASE_URL+`/${todos.id}`, {
+                method:'PATCH',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ completed: !item.completed})
+            })
+            if (!response.ok) {
+                throw new Error(`HTTP error: ${response.status}`)
+            }
+            setTodos(todos => todos.map(t => t.id === item.id ? {...t, completed: !t.completed} : t))
+            console.log(response.status)
+        } catch (error) {
+            setError(error)
+        }
     }
 
     if (isLoading) {
@@ -63,7 +78,7 @@ export default function Exercise1() {
         <>
             <h1>Welcome to exercise 1</h1>
             <ul style={{listStyle:'none', padding:0, margin:0, textAlign:'left'}}>
-                {todos.map(item => <li key={item.id}> <input type='checkbox' onChange={handleToggle(item)} checked={item.completed}/>{item.title}</li>)}
+                {todos.map(item => <li key={item.id}> <input type='checkbox' onChange={() => handleToggle(item)} checked={item.completed}/>{item.title}</li>)}
             </ul>
         </>
     )
