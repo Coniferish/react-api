@@ -9,8 +9,69 @@
  *  indicating the todo item was completed.
  */
 
+import { useState, useEffect } from 'react'
+
+const BASE_URL = "https://jsonplaceholder.typicode.com/todos"
+
 export default function Exercise1() {
+    const [error, setError] = useState(null)
+    const [todos, setTodos] = useState(null)
+    const isLoading = todos === null && error === null
+
+    useEffect(() => {
+        let ignore = false;
+
+        (async () => {
+            try {
+                const response = await fetch(BASE_URL+'?_limit=10')
+                if (!response.ok) {
+                    throw new Error(`HTTP error: ${response.status}`)
+                }
+                const data = await response.json()
+                if (!ignore) setTodos(data)
+            } catch (err) {
+                if (!ignore) setError(err)
+            }
+        })();
+
+        return () => {ignore = true}
+    }, []);
+
+    async function handleToggle(item) {
+        const previousTodos = todos.map(t => ({...t}))
+        setTodos(todos => todos.map(t => t.id === item.id ? {...t, completed: !t.completed} : t))
+
+        try {
+            const response = await fetch(BASE_URL+`/${todos.id}`, {
+                method:'PATCH',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ completed: !item.completed})
+            })
+            if (!response.ok) {
+                throw new Error(`HTTP error: ${response.status}`)
+            }
+        } catch (error) {
+            setTodos(previousTodos)
+            setError(error)
+        }
+    }
+
+    if (isLoading) {
+        return <>Loading...</>
+    }
+
+    if (error) {
+        return <>Error: {error.message}</>
+    }
+
     return (
-        <h1>Welcome to exercise 1</h1>
+        <>
+            <h1>Welcome to exercise 1</h1>
+            <ul style={{listStyle:'none', padding:0, margin:0, textAlign:'left'}}>
+                {todos.map(item => <li key={item.id}> <input type='checkbox' onChange={() => handleToggle(item)} checked={item.completed}/>{item.title}</li>)}
+            </ul>
+        </>
     )
 }
