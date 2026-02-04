@@ -67,10 +67,6 @@ export default function Exercise1() {
                 body: JSON.stringify({completed: !todo.completed})
             })
             if (!response.ok) {
-                setTodos(todos =>
-                    todos.map(t =>
-                        t.id === todo.id ? {...t, completed: !t.completed } : t
-                ))
                 throw new Error(`HTTP error: ${response.status}`)
 
             }
