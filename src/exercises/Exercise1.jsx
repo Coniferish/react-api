@@ -53,7 +53,7 @@ export default function Exercise1() {
         return () => controller.abort()
     }, []);
 
-    async function handleToggle(todo) {
+   const handleToggle = async (todo) => {
         setTodos(todos =>
             todos.map(t =>
                 t.id === todo.id ? {...t, completed: !t.completed } : t
