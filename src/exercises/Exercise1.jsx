@@ -12,6 +12,17 @@ import { useState, useEffect } from "react"
 
 const BASE_URL = "https://jsonplaceholder.typicode.com/todos"
 
+function TodoItem({todo, onToggle}) {
+    const handleChange = () => onToggle(todo.id)
+    
+    return (
+        <li key={todo.id}>
+            <input type='checkbox' checked={todo.completed} onChange={handleChange}/>
+            {todo.title}
+        </li>
+    )
+}
+
 export default function Exercise1() {
     /*
     1) declare state
@@ -97,10 +108,11 @@ export default function Exercise1() {
             textAlign:'left'
         }}>
             {todos.map(t => 
-                <li key={t.id}>
-                    <input type='checkbox' checked={t.completed} data-todo-id={t.id} onChange={() => handleToggle(t.id)}/>
-                    {t.title}
-                </li>
+                <TodoItem
+                    key={t.id}
+                    todo={t}
+                    onToggle={handleToggle}
+                />
             )}
         </ul>
         </>
