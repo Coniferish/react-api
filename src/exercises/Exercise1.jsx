@@ -53,8 +53,8 @@ export default function Exercise1() {
         return () => controller.abort()
     }, []);
 
-   const handleToggle = async (e) => {
-        const todo = todos.find(t => t.id === Number(e.target.dataset.todoId))
+   const handleToggle = async (todoId) => {
+        const todo = todos.find(t => t.id === todoId)
 
         setTodos(todos =>
             todos.map(t =>
@@ -98,7 +98,7 @@ export default function Exercise1() {
         }}>
             {todos.map(t => 
                 <li key={t.id}>
-                    <input type='checkbox' checked={t.completed} data-todo-id={t.id} onChange={handleToggle}/>
+                    <input type='checkbox' checked={t.completed} data-todo-id={t.id} onChange={() => handleToggle(t.id)}/>
                     {t.title}
                 </li>
             )}
